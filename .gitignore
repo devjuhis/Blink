@@ -9,6 +9,13 @@ dist/
 web-build/
 expo-env.d.ts
 
+# Firebase
+firebaseConfig.js
+
+## prettier
+ .prettierrc
+
+
 # Native
 *.orig.*
 *.jks
