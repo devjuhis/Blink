@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 5,
-    elevation: 5, // Android varjo
+    elevation: 5,
   },
   buttonText: {
     color: COLORS.white,
@@ -87,6 +87,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 10,
   },
+
+  // luokat
+
+  logOut: {
+    position: 'absolute',
+    top: 65,
+    right: 35
+  }
 });
 
 export default styles;

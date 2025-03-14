@@ -22,8 +22,7 @@
           "supportsBackgroundPlayback": true,
           "supportsPictureInPicture": true
         }
-      ],
-      "@react-native-google-signin/google-signin"
+      ]
     ],
     "splash": {
       "image": "./assets/splash-icon.png",
@@ -31,18 +30,17 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true,
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "googleServicesFile": "./google-services.json"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     }
   }
 }
+

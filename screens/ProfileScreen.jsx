@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
     View,
     Text,
@@ -8,6 +8,9 @@ import {
     Pressable,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { useFocusEffect } from "@react-navigation/native";
+
+import { AuthContext } from "../context/AuthContext";
 
 import { VideoView, useVideoPlayer } from "expo-video";
 import { useEvent } from "expo";
@@ -16,38 +19,43 @@ import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 const ProfileScreen = () => {
     const [videos, setVideos] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { user } = useContext(AuthContext);
 
-    useEffect(() => {
-        const fetchVideos = async () => {
-            try {
-                const storage = getStorage();
-                const videosRef = ref(storage, "videos/");
-                const videoList = await listAll(videosRef);
+    useFocusEffect(
+        React.useCallback(() => {
+            const fetchTodaysVideos = async () => {
+                try {
+                    const storage = getStorage();
+                    const today = new Date();
+                    const datePath = `${today.getDate()}.${today.getMonth() + 1}`;
+                    const videosRef = ref(storage, `${user.uid}/${datePath}`);
+                    const videoList = await listAll(videosRef);
 
-                const videosData = await Promise.all(
-                    videoList.items.map(async (video) => {
-                        const url = await getDownloadURL(video);
-                        return {
-                            url,
-                            date: extractDateFromFilename(video.name),
-                        };
-                    })
-                );
+                    const videosData = await Promise.all(
+                        videoList.items.map(async (video) => {
+                            const url = await getDownloadURL(video);
+                            return {
+                                url,
+                                date: extractDateFromFilename(video.name),
+                            };
+                        })
+                    );
 
-                setVideos(videosData);
-            } catch (error) {
-                console.error("Error fetching videos:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
+                    setVideos(videosData);
+                } catch (error) {
+                    console.error("Error fetching videos:", error);
+                } finally {
+                    setLoading(false);
+                }
+            };
 
-        fetchVideos();
-    }, []);
+            fetchTodaysVideos();
+        }, [])
+    );
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>My Blinks</Text>
+            <Text style={styles.text}>My Blinks (Todays)</Text>
 
             {loading ? (
                 <ActivityIndicator size="large" color="#0000ff" />
@@ -91,6 +99,7 @@ const VideoPlayer = ({ videoUrl, videoDate }) => {
                 player={player}
                 nativeControls={false}
                 allowsFullscreen={false}
+                staysActiveInBackground={false}
                 contentFit="fill"
             />
             <View style={styles.overlay}>

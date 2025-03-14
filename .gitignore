@@ -13,8 +13,13 @@ expo-env.d.ts
 firebaseConfig.js
 
 ## prettier
- .prettierrc
+.prettierrc
 
+## Android
+/Android
+
+## IOS
+/ios
 
 # Native
 *.orig.*
