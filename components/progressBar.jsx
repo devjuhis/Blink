@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
         height: "100%",
         backgroundColor: "rgba(0, 0, 0, 0.7)",
         position: "absolute",
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)'
+        top: 0,
+        left: 0,
+        zIndex: 100,
     },
     progressText: {
         color: "white",

@@ -4,7 +4,7 @@ export const COLORS = {
   primary: "#6200ea", // Violetti pääväri
   secondary: "#03dac6", // Turkoosi korosteväri
   background: "#f5f5f5", // Vaalea tausta
-  text: "#333", // Tumma teksti
+  text: "#333",
   white: "#fff",
   black: "#000",
   gray: "#aaa",
@@ -39,11 +39,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: SIZES.borderRadius,
     paddingHorizontal: SIZES.padding,
+    marginVertical: 20,
     shadowColor: COLORS.black,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 5,
     elevation: 5,
+    width: '90%',
   },
   buttonText: {
     color: COLORS.white,
@@ -76,6 +78,8 @@ const styles = StyleSheet.create({
   title: {
     ...FONTS.title,
     color: COLORS.text,
+    textAlign: "center",
+    marginTop: 150,
   },
   text: {
     ...FONTS.regular,
@@ -85,10 +89,9 @@ const styles = StyleSheet.create({
     ...FONTS.regular,
     color: COLORS.gray,
     textAlign: 'center',
-    marginBottom: 10,
+    marginBottom: 15,
+    maxWidth: 300,
   },
-
-  // luokat
 
   logOut: {
     position: 'absolute',

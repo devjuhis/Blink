@@ -31,7 +31,7 @@ const LoginScreen = ({ navigation }) => {
             );
             console.log(userCredential.user);
             setUser(userCredential.user);
-        } catch (error) {
+        } catch (e) {
             Alert.alert("Error", "Check email and password");
         }
     };

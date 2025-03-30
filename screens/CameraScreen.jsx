@@ -5,18 +5,19 @@ import {
     View,
     Button,
     TouchableOpacity,
-    Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { useFocusEffect } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
+// omat
 import { AuthContext } from "../context/AuthContext";
 import ProgressBar from "../components/progressBar";
 import VideoPlayer from "../components/VideoPlayer";
 
 // expo
-import { CameraView, useCameraPermissions } from "expo-camera";
+import { CameraView, useCameraPermissions, useMicrophonePermissions } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 
 // firebase
@@ -25,6 +26,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export default function CameraScreen() {
     const [permission, requestPermission] = useCameraPermissions();
+    const [request_mic_Permission] = useMicrophonePermissions();
     const [timer, setTimer] = useState(null);
     const [recording, setRecording] = useState(false);
     const [uploading, setUploading] = useState(false);
@@ -33,23 +35,32 @@ export default function CameraScreen() {
     const [type, setType] = useState("back");
     const cameraRef = useRef(null);
     const { user } = useContext(AuthContext);
+    const navigation = useNavigation();
 
     useFocusEffect(
         React.useCallback(() => {
             
             return () => {
                 setVideo(null);
+                setRecording(false);
+                setProgress(0);
+                setUploading(false);
             };
         }, [])
     );
     
 
     useEffect(() => {
+        
         (async () => {
+            await requestPermission();
+            await request_mic_Permission();
             await MediaLibrary.requestPermissionsAsync();
+            //todo hande cases when permission is not given
             if (!permission || !permission.granted) {
-                requestPermission();
+                console.log('no permission');
             }
+            console.log(permission);
         })();
     }, []);
 
@@ -61,7 +72,7 @@ export default function CameraScreen() {
         );
     }
 
-    if (!permission.granted) {
+    if (!permission.granted || permission.status !== "granted") {
         return (
             <View style={styles.container}>
                 <Text>No permission for camera</Text>
@@ -74,12 +85,15 @@ export default function CameraScreen() {
         try {
             setRecording(true);
             setTimer(3);
-
+            
             const videoDataPromise = cameraRef.current.recordAsync();
+            
 
+            // eslint-disable-next-line no-undef
             const countdown = setInterval(() => {
                 setTimer((prev) => {
                     if (prev === 1) {
+                        // eslint-disable-next-line no-undef
                         clearInterval(countdown);
                         stopRecording();
                         setTimer(null);
@@ -112,15 +126,9 @@ export default function CameraScreen() {
         return blob;
     }
 
-    async function saveVideo(videoUri) {
-        if (!videoUri) {
-            console.error("Virhe: Videon URI puuttuu.");
-            return null;
-        }
-    
+    async function saveVideo(videoUri, user) {
         try {
             const blob = await uriToBlob(videoUri);
-    
             const fileName = `video_${Date.now()}.mp4`;
             const today = new Date();
             const datePath = `${today.getDate()}.${today.getMonth() + 1}`;
@@ -128,7 +136,7 @@ export default function CameraScreen() {
             const storageRef = ref(storage, `${user_uid}/${datePath}/${fileName}`);
             const uploadTask = uploadBytesResumable(storageRef, blob);
     
-            setUploading(true);
+            setUploading(true); // Aloitetaan lataus
     
             return new Promise((resolve, reject) => {
                 uploadTask.on(
@@ -143,13 +151,16 @@ export default function CameraScreen() {
                         reject(error);
                     },
                     async () => {
-                        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                        console.log("Video tallennettu:", downloadURL);
-                        Alert.alert("Video uploaded!");
-                        setUploading(false);
-                        setProgress(0);
-                        setVideo(null)
-                        resolve(downloadURL);
+                        try {
+                            const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+                            setUploading(false);
+                            resolve(downloadUrl);
+                            navigation.navigate('TodaysBlinks')
+                        } catch (error) {
+                            console.error("Virhe haettaessa latauslinkkiä:", error);
+                            setUploading(false);
+                            reject(error);
+                        }
                     }
                 );
             });
@@ -211,8 +222,8 @@ export default function CameraScreen() {
                     </View>
                 </CameraView>
             ) : (
-                <View style={{ width: "100%", height: "100%" }}>
-                    <VideoPlayer videoUrl={video} />
+                <View style={{ width: "100%", height: "100%", position: 'relative' }}>
+                    <VideoPlayer videoUrl={video} videoDate={null} screen="full" />
                     <View style={styles.overlay}>
                     {uploading && (
                         <ProgressBar progress={progress} />
@@ -224,7 +235,7 @@ export default function CameraScreen() {
                             <TouchableOpacity
                                 style={styles.bottomButton}
                                 onPress={async () => {
-                                    saveVideo(video);
+                                    saveVideo(video, user);
                                 }}
                             >
                                 <Icon name="save-alt" size={25} color="white" />

@@ -2,7 +2,11 @@ import React, { useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "../styles/style";
 import { useNavigation } from "@react-navigation/native";
+
+//omat
 import { AuthContext } from "../context/AuthContext";
+import DaysInRow from "../components/daysInRow";
+import LastPost from "../components/lastPost";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -29,6 +33,9 @@ const HomeScreen = () => {
             >
                 <Text style={styles.buttonText}>Start</Text>
             </TouchableOpacity>
+
+            <DaysInRow user={user}></DaysInRow>
+            <LastPost user={user}></LastPost>
         </View>
     );
 };
