@@ -25,8 +25,8 @@ import { storage } from "../firebaseConfig";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export default function CameraScreen() {
-    const [permission, requestPermission] = useCameraPermissions();
-    const [request_mic_Permission] = useMicrophonePermissions();
+    const [permission, requestCameraPermission] = useCameraPermissions();
+    const [micPermission, requestMicPermission] = useMicrophonePermissions();
     const [timer, setTimer] = useState(null);
     const [recording, setRecording] = useState(false);
     const [uploading, setUploading] = useState(false);
@@ -51,16 +51,16 @@ export default function CameraScreen() {
     
 
     useEffect(() => {
-        
         (async () => {
-            await requestPermission();
-            await request_mic_Permission();
-            await MediaLibrary.requestPermissionsAsync();
-            //todo hande cases when permission is not given
-            if (!permission || !permission.granted) {
-                console.log('no permission');
+            const camStatus = await requestCameraPermission();
+            const micStatus = await requestMicPermission();
+            const mediaStatus = await MediaLibrary.requestPermissionsAsync();
+
+            if (!camStatus.granted || !micStatus.granted || !mediaStatus.granted) {
+                console.log('Lupia ei myönnetty');
+            } else {
+                console.log('Kaikki luvat myönnetty');
             }
-            console.log(permission);
         })();
     }, []);
 
@@ -76,7 +76,7 @@ export default function CameraScreen() {
         return (
             <View style={styles.container}>
                 <Text>No permission for camera</Text>
-                <Button title="Ask permission" onPress={requestPermission} />
+                <Button title="Ask permission" onPress={requestCameraPermission} />
             </View>
         );
     }

@@ -4,7 +4,7 @@
     "slug": "blink",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/blink_logo_ss.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "plugins": [

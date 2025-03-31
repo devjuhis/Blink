@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
-import { View, Text, StyleSheet, Animated } from "react-native";
+import { Text, StyleSheet, Animated } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 
 const LastPost = ({ user }) => {
     const [lastVideo, setLastVideo] = useState("Ei löydy videoita");
     const fadeAnim = new Animated.Value(0);
 
-    useEffect(() => {
+    useFocusEffect(() => {
         const fetchLatestVideo = async () => {
             try {
                 const storage = getStorage();
@@ -89,7 +90,7 @@ const LastPost = ({ user }) => {
             useNativeDriver: true,
         }).start();
 
-    }, [user, fadeAnim]);
+    }, []);
 
     return (
         <Animated.View style={[styles.container, { opacity: fadeAnim }]}>

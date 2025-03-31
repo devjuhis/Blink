@@ -15,15 +15,16 @@
     "@react-navigation/bottom-tabs": "^7.2.1",
     "@react-navigation/native": "^7.0.15",
     "@react-navigation/stack": "^7.1.2",
-    "expo": "~52.0.38",
+    "expo": "~52.0.41",
     "expo-auth-session": "~6.0.3",
     "expo-av": "~15.0.2",
     "expo-camera": "~16.0.18",
-    "expo-dev-client": "~5.0.14",
+    "expo-dev-client": "~5.0.15",
     "expo-file-system": "~18.0.11",
     "expo-media-library": "~17.0.6",
     "expo-notifications": "~0.29.14",
     "expo-status-bar": "~2.0.1",
+    "expo-system-ui": "^4.0.8",
     "expo-video": "^2.0.6",
     "firebase": "^11.4.0",
     "react": "18.3.1",
@@ -42,9 +43,9 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.3.12",
-    "typescript": "^5.3.3",
     "eslint": "^8.57.0",
-    "eslint-config-expo": "~8.0.1"
+    "eslint-config-expo": "~8.0.1",
+    "typescript": "^5.3.3"
   },
   "private": true,
   "expo": {

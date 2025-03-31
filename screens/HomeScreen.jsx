@@ -21,10 +21,10 @@ const HomeScreen = () => {
             </TouchableOpacity>
 
             <Text style={styles.title}>
-                Welcome to Blink {user?.displayName || ""}!
+                Welcome to Blink {"\n"} {user?.displayName || ""}!
             </Text>
             <Text style={styles.subtext}>
-                Film a 10s video of your day and share it with your friends 📹
+                Film Blinks of your day and share them with your friends 📹
             </Text>
             
             <TouchableOpacity

@@ -24,6 +24,8 @@ export default async function mergeVideos(user, setProgress, setUploading, setVi
         });
 
         // Lähetetään videot backendille yhdistettäväksi
+        //http://192.168.10.213:5000/api/blink/videos
+        //https://macrohub-backend-6-3-25-macrohub.2.rahtiapp.fi:5000/api/blink/videos
         const response = await fetch("http://192.168.10.213:5000/api/blink/videos", {
             method: "POST",
             body: formData,
