@@ -21,7 +21,6 @@
 
 1. **Varmista, että sinulla on asennettuna seuraavat**:
    - [Node.js](https://nodejs.org/)
-   - [Expo CLI](https://docs.expo.dev/get-started/installation/)
    - [Firebase-tili](https://firebase.google.com/)
 
 2. **Kloonaa tämä projekti**:
@@ -43,7 +42,7 @@
 
 ---
 
-### 🧠 Mitä opin tällä projektissa?
+### 🧠 Mitä opin tässä projektissa?
 - Expo toimii hyvin nopeaan prototypointiin, mutta buildien ja natiivikirjastojen kanssa tulee helposti ongelmia.
 - Firebase tarjoaa monipuoliset ratkaisut tallennukseen ja käyttäjien hallintaan, pienellä koodimäärällä.
 - Lupien hallinta oli uutta ja hieman hankalaa, mutta opin tässä projektissa ainakin perusteet.
