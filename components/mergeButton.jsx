@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text } from "react-native";
 
 // Omat
 import mergeVideos from "../functions/mergeVideos";
+import { fetchTodaysVideos } from "../functions/videoUtils";
 
 import { COLORS } from "../styles/style";
 
@@ -25,7 +26,16 @@ const MergeButton = ({ user, uploading, setUploading, setProgress, setVideos }) 
             style={[styles.mergeButton, uploading && styles.disabledButton]}
             onPress={async () => {
                 setUploading(true);
-                await mergeVideos(user, setProgress, setUploading, setVideos);
+                const uploadSuccess = await mergeVideos(user, setProgress, setUploading, setVideos);
+
+                if (uploadSuccess) {
+                    const videosList = await fetchTodaysVideos(user);
+                    setVideos(videosList);
+                } else {
+                    console.log("Videon yhdistäminen epäonnistui");
+                }
+
+                setUploading(false);
             }}
             disabled={uploading}
         >

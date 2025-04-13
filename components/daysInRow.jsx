@@ -68,8 +68,9 @@ const DaysInRow = ({ user }) => {
     return (
         <View style={styles.container}>
             <Animated.Text style={[styles.text, { opacity: fadeAnim }]}>
-                {days} {days === 1 ? "day" : "days"} in a row{" "}
-                {days >= 5 ? "🔥" : days >= 3 ? "💪" : days >= 1 ? "👍" : "🙂"}
+            {days === 0 ? "No Blinks today" : 
+                `${days} ${days === 1 ? "day" : "days"} in a row `}
+            {days >= 5 ? "🔥" : days >= 3 ? "💪" : days >= 1 ? "👍" : " 🙁"}
             </Animated.Text>
         </View>
     );
@@ -84,6 +85,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#1E1E1E",
         borderRadius: 10,
         marginTop: 50,
+        padding: 30,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,

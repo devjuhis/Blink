@@ -2,7 +2,7 @@ import React, { useState, useCallback, useContext } from "react";
 import { View, Text, StyleSheet, FlatList, ActivityIndicator } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
-// Omien tiedostojen importit
+// Omien
 import { fetchMonthlyVideos } from "../functions/videoUtils";
 import { AuthContext } from "../context/AuthContext";
 import { COLORS } from "../styles/style";
@@ -38,7 +38,7 @@ const BlinksScreen = () => {
     if (!user) {
         return (
             <View style={styles.container}>
-                <Text style={styles.errorText}>Käyttäjää ei löydy</Text>
+                <Text style={styles.errorText}>User not found</Text>
             </View>
         );
     }

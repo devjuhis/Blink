@@ -136,7 +136,7 @@ export default function CameraScreen() {
             const storageRef = ref(storage, `${user_uid}/${datePath}/${fileName}`);
             const uploadTask = uploadBytesResumable(storageRef, blob);
     
-            setUploading(true); // Aloitetaan lataus
+            setUploading(true);
     
             return new Promise((resolve, reject) => {
                 uploadTask.on(

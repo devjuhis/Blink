@@ -6,7 +6,6 @@ export default async function mergeVideos(user, setProgress, setUploading, setVi
         setUploading(true);
         setProgress(0);
 
-        // Ladataan tämän päivän videot
         const todaysVideos = await fetchTodaysVideos(user);
         if (!todaysVideos || todaysVideos.length < 2) {
             console.log("Ei tarpeeksi videoita yhdistettäväksi");
@@ -25,13 +24,14 @@ export default async function mergeVideos(user, setProgress, setUploading, setVi
 
         // Lähetetään videot backendille yhdistettäväksi
         //http://192.168.10.213:5000/api/blink/videos
-        //https://macrohub-backend-6-3-25-macrohub.2.rahtiapp.fi:5000/api/blink/videos
+        //https://macrohub-backend-6-3-25-macrohub.2.rahtiapp.fi/api/blink/videos
         const response = await fetch("http://192.168.10.213:5000/api/blink/videos", {
             method: "POST",
             body: formData,
         });
 
         if (!response.ok) {
+            console.log("Virhe yhdistettäessä videoita:", response.statusText);
             throw new Error("Backend palautti virheen.");
         }
 
@@ -41,7 +41,6 @@ export default async function mergeVideos(user, setProgress, setUploading, setVi
         const datePath = `${today.getDate()}.${today.getMonth() + 1}`;
         const user_uid = user.uid;
 
-        // Firebase Storage -polku
         const storage = getStorage();
         const userFolderRef = ref(storage, `${user_uid}/${datePath}/`);
 
