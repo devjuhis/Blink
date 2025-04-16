@@ -1,5 +1,6 @@
 ![Blink Logo](assets/blink_logo_ss.png)
-![Blink Video](assets/promo_video.mp4)
+📽️ [Katso promovideo](assets/promo_video.mp4)
+
 # 📱 Blink - Lyhytvideo Päiväkirja
 
 **Blink** on React Native ja Expo -alustalla rakennettu sovellus, joka toimii **lyhytvideo päiväkirjana**. Tallenna omia videoitasi, jaa päiväsi muille ja seuraa muiden käyttäjien inspiroivia päiväkirjoja! 🌟
