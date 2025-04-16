@@ -1,5 +1,5 @@
 ![Blink Logo](assets/blink_logo_ss.png)
-📽️ [Katso promovideo](assets/promo_video.mp4)
+📽️ [Katso promovideo](https://haagahelia-my.sharepoint.com/:v:/r/personal/bhi254_myy_haaga-helia_fi/Documents/promo_video.mp4?csf=1&web=1&e=JgNbbj&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
 
 # 📱 Blink - Lyhytvideo Päiväkirja
 
