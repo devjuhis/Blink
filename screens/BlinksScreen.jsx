@@ -2,7 +2,7 @@ import React, { useState, useCallback, useContext } from "react";
 import { View, Text, StyleSheet, FlatList, ActivityIndicator } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
-// Omien
+// Omat
 import { fetchMonthlyVideos } from "../functions/videoUtils";
 import { AuthContext } from "../context/AuthContext";
 import { COLORS } from "../styles/style";

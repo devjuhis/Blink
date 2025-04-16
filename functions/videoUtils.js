@@ -1,6 +1,5 @@
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 
-// Haetaan tämän päivän videot Firebase Storagesta
 const fetchTodaysVideos = async (user) => {
     try {
         const storage = getStorage();
