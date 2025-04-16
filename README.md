@@ -39,6 +39,14 @@
 | Video jäi pyörimään taustalle screeniltä poistuttaessa | Käytin `useFocusEffect` palauttamaan tilan oletukseksi | React Hookit | Opin hallitsemaan komponentin elinkaarta |
 | Videoiden tallennus ja käyttäjien hallinta | Käytin Firebase Storagea ja Authenticationia | Firebase | Opin, miten videot tallennetaan pilveen ja käyttäjät tunnistetaan |
 | Käyttäjien esittäminen toisille käyttäjille | Tallensin rekisteröityessä tiedot Firebase Databaseen | Firebase Database | Opin tallentamaan ja hakemaan tietoa firebase databasesta |
+| Rahdissa ongelmia kansion kirjoitusoikeuksien kanssa | Lisäsin persistentVolumeClaimin ja yhdistin sen projektiin | persistentVolumeClaim | Tämä on paikka jossa pitää dataa kontin elinkaaren ulkopuolella, ja opin miten se tehdään |
+| FFMPEG installer ei toimi ohjelmakoodista | FFMPEG ympäristö tulee asentaa kontin rakennus vaiheessa | Docker | Dockerfilessä tehdään kaikki ympäristöön tehtävät asennukset, kontin rakennuksen jälkeen voi olla vaikeuksia muuttaa ympäristöä |
+| Firebase antoi yhtäkkiä ongelmia ettei käyttäjällä ole oikeuksia hakea omia videoita | Muutin aika scopea, toinen vaihtoehto olisi ollut poistaa sääntö kokonaan | Firebase rules | Firebasessa on rules ikkuna jossa voidaan määritellä aika ikkuna jossa käyttäjällä on oikeuksia, kun aikaikkuna on sulkeutunut käyttäjällä ei ole oikeksia | 
+| Käyttäjän tietojen siirto sivulta sivulle | `React Context` on hyvä tapa siirtää tietoa komponenttipuussa contextin lapsien välillä ilman propseja | React createContext | React contextin käyttöä ja sen hyödyntämistä autentikoimisessa eri komponenteissa ja pyynnöissä |
+| Halusin lisätä sivun navigaattoriin mutta en tabseihin | Lisäsin sen `StackNavigatoriin`, eli minulla on projektissani kaksi eri navigaattoria (stack ja tab) | React-navigation stack ja bottom-tabs | On hyödyllistä olla kaksi navigaattoria, jos et halua että kaikki sivut näkyvät kaikille alapalkissa |
+| Halusin testata expo sovellustani ulkona | Expo start --tunnel mahdollistaa development buildin käytön toisessa verkossa kuin isäntäkone | Expo tunnel | Expo tunnel on mmahdollistaa expo sovelluksen käytön toisessa verkossa ngrokin avulla |
+| Firebase storage:n käyttö ei ole ilmaista | Kun tallennetaan ja siirrellään videoita tietoliikenteen määrä kasvaa helposti suureksi ja alkaa maksamaan kun ylittää 100GB halvemmilla bucketeilla jotka sijaitsee Yhdysvalloissa | Firestore | Referessiksi yhtenä päivänä kun testailin ohjelmaa ja latasin paljon eri käyttäjien videoita tietoliikenteen latausmäärä oli 8,8GB eli noin 9% ilmaismäärästä. Eli jos käyttäjiä olisi useampi ja käyttäisi päivittäin, ilmaisraja tulisi aika nopeasti täyteen |
+
 
 ---
 
@@ -47,5 +55,6 @@
 - Firebase tarjoaa monipuoliset ratkaisut tallennukseen ja käyttäjien hallintaan, pienellä koodimäärällä.
 - Lupien hallinta oli uutta ja hieman hankalaa, mutta opin tässä projektissa ainakin perusteet.
 - Eas cli on todella hyödyllinen työkalu buildien rakentamiseen ja seuraamiseen.
+- Videoiden käsittely ohjelmissa tietoliikenteen määrä kasvaa nopeasti isoksi ja latausajat saattavat olla ongelmallisia.
 
 
