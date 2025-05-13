@@ -27,7 +27,7 @@
 
 2. **Kloonaa tämä projekti**:
    ```bash
-   git clone https://github.com/yourusername/blink.git
+   git clone https://github.com/devjuhis/blink.git
 
 # 🎓 Oppimispäiväkirja
 
